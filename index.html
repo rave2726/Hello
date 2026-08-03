@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>August 9 ❤️</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:linear-gradient(135deg,#ffb6c1,#ffe4e1);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+.card{
+    background:white;
+    padding:35px;
+    border-radius:20px;
+    text-align:center;
+    width:90%;
+    max-width:450px;
+    box-shadow:0 10px 25px rgba(0,0,0,.2);
+}
+h1{
+    color:#e91e63;
+}
+p{
+    color:#555;
+    font-size:18px;
+}
+button{
+    margin:10px;
+    padding:12px 25px;
+    border:none;
+    border-radius:30px;
+    font-size:16px;
+    cursor:pointer;
+}
+.yes{
+    background:#e91e63;
+    color:white;
+}
+.no{
+    background:#ddd;
+}
+#answer{
+    margin-top:20px;
+    font-size:18px;
+    color:#e91e63;
+    font-weight:bold;
+}
+input{
+    margin-top:15px;
+    padding:10px;
+    width:80%;
+    border-radius:10px;
+    border:1px solid #ccc;
+    text-align:center;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>Hi, Mae ❤️</h1>
+
+    <p>
+        I have something to ask you...
+    </p>
+
+    <h2>Would you like to go on a date with me on <br>August 9? 🌹</h2>
+
+    <button class="yes" onclick="showTime()">Yes! ❤️</button>
+    <button class="no" onclick="moveButton(this)">No 🙈</button>
+
+    <div id="timeBox" style="display:none;">
+        <p>Yay!! ❤️</p>
+        <p>What time should I pick you up?</p>
+
+        <input type="time" id="time">
+
+        <br><br>
+
+        <button class="yes" onclick="submitTime()">Send</button>
+
+        <p id="answer"></p>
+    </div>
+</div>
+
+<script>
+function showTime(){
+    document.getElementById("timeBox").style.display="block";
+}
+
+function submitTime(){
+    const time = document.getElementById("time").value;
+    if(time==""){
+        alert("Please choose a time ❤️");
+        return;
+    }
+    document.getElementById("answer").innerHTML =
+    "Perfect! I'll be excited to see you at " + time + ". ❤️";
+}
+
+function moveButton(btn){
+    btn.style.position="absolute";
+    btn.style.left=Math.random()*70+"%";
+    btn.style.top=Math.random()*70+"%";
+}
+</script>
+
+</body>
+</html>
