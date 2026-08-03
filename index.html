@@ -3,19 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Will You Go On Our First Date? ❤️</title>
+<title>Our First Date ❤️</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial,sans-serif;
+font-family:'Poppins',sans-serif;
 }
 
 body{
-background:linear-gradient(135deg,#ff9ecb,#ffd6e7);
-overflow-x:hidden;
+background:linear-gradient(135deg,#ffb6d9,#ffdce9);
+overflow:hidden;
 display:flex;
 justify-content:center;
 align-items:center;
@@ -23,13 +26,13 @@ min-height:100vh;
 }
 
 .container{
+width:90%;
+max-width:600px;
 background:white;
 padding:30px;
-border-radius:20px;
-width:90%;
-max-width:550px;
-text-align:center;
+border-radius:25px;
 box-shadow:0 10px 30px rgba(0,0,0,.2);
+text-align:center;
 position:relative;
 z-index:2;
 animation:fade 1s;
@@ -41,61 +44,67 @@ margin-bottom:10px;
 }
 
 p{
-margin-bottom:20px;
+margin-bottom:15px;
 }
 
-select,input{
+.notice{
+background:#fff5f8;
+border:2px solid #ffc2d6;
+padding:12px;
+border-radius:12px;
+font-size:14px;
+margin-bottom:20px;
+color:#555;
+}
+
+input,select{
 width:100%;
 padding:12px;
 margin:10px 0;
 border-radius:10px;
-border:2px solid #ff9ecb;
+border:2px solid #ffb3cf;
 font-size:16px;
 }
 
 button{
-margin-top:15px;
-padding:14px;
 width:100%;
+padding:14px;
+margin-top:15px;
 background:#ff4d88;
 color:white;
+font-size:18px;
 border:none;
 border-radius:12px;
-font-size:18px;
 cursor:pointer;
 transition:.3s;
 }
 
 button:hover{
-background:#ff2d74;
 transform:scale(1.05);
+background:#ff2d74;
 }
 
 #result{
-margin-top:25px;
-padding:20px;
-background:#fff0f6;
-border-radius:15px;
 display:none;
-animation:fade 1s;
+margin-top:25px;
+background:#fff0f6;
+padding:20px;
+border-radius:15px;
 }
 
 .heart{
 position:fixed;
 bottom:-20px;
 font-size:25px;
-animation:float 10s linear infinite;
-opacity:.8;
+animation:float 8s linear infinite;
 }
 
 @keyframes float{
 0%{
-transform:translateY(0) rotate(0deg);
+transform:translateY(0) rotate(0);
 opacity:0;
 }
-20%{
-opacity:1;
-}
+20%{opacity:1;}
 100%{
 transform:translateY(-120vh) rotate(360deg);
 opacity:0;
@@ -103,14 +112,8 @@ opacity:0;
 }
 
 @keyframes fade{
-from{
-opacity:0;
-transform:translateY(20px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;transform:translateY(0);}
 }
 </style>
 </head>
@@ -119,17 +122,21 @@ transform:translateY(0);
 
 <div class="container">
 
-<h1>Will You Go On a Date With Me? ❤️</h1>
+<h1>Will You Go on Our First Date? ❤️</h1>
 
-<p>Every answer you choose will make me smile.</p>
+<p>I made this little website because asking you out deserves something special.</p>
+
+<div class="notice">
+❤️ By clicking <strong>Send My Answer</strong>, your selected date plans will be sent to Rave so he can prepare everything for our date.
+</div>
 
 <select id="type">
-<option>Simple Mall Date</option>
-<option>Cinema Date</option>
-<option>Coffee Date</option>
-<option>Picnic Date</option>
-<option>Arcade Date</option>
-<option>Dinner Date</option>
+<option>Simple Mall Date 🛍️</option>
+<option>Coffee Date ☕</option>
+<option>Cinema Date 🎬</option>
+<option>Picnic 🌸</option>
+<option>Dinner Date 🍽️</option>
+<option>Arcade Date 🎮</option>
 </select>
 
 <input type="date" id="date">
@@ -137,11 +144,11 @@ transform:translateY(0);
 <input type="time" id="time">
 
 <select id="food">
-<option>Chicken 🍗</option>
 <option>Pizza 🍕</option>
+<option>Chicken 🍗</option>
 <option>Burger 🍔</option>
-<option>Steak 🥩</option>
 <option>Pasta 🍝</option>
+<option>Steak 🥩</option>
 <option>Ice Cream 🍨</option>
 <option>Coffee ☕</option>
 <option>Chocolate 🍫</option>
@@ -149,19 +156,20 @@ transform:translateY(0);
 
 <input type="time" id="pickup" placeholder="Pickup Time">
 
-<button onclick="showMessage()">Send My Answer ❤️</button>
+<button onclick="sendAnswer()">Send My Answer ❤️</button>
 
 <div id="result"></div>
 
 </div>
 
-<audio autoplay loop>
-<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-</audio>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <script>
+emailjs.init({
+publicKey:"OowRwQDYcGfs97bIk"
+});
 
-function showMessage(){
+function sendAnswer(){
 
 let type=document.getElementById("type").value;
 let date=document.getElementById("date").value;
@@ -169,61 +177,53 @@ let time=document.getElementById("time").value;
 let food=document.getElementById("food").value;
 let pickup=document.getElementById("pickup").value;
 
-let result=document.getElementById("result");
+emailjs.send("service_ljlth0i","template_gad3bkt",{
+date_type:type,
+date:date,
+time:time,
+food:food,
+pickup:pickup
+}).then(function(){
 
-result.style.display="block";
+document.getElementById("result").style.display="block";
 
-result.innerHTML=`
+document.getElementById("result").innerHTML=`
 <h2>Thank You, My Love ❤️</h2>
 
 <p>
-Reading your choices made my heart so happy.
-I can't stop smiling knowing that we're planning
-our very first date together.
-</p>
-
-<p>
-💕 <b>Date:</b> ${date}<br>
-💕 <b>Date Type:</b> ${type}<br>
-💕 <b>Time:</b> ${time}<br>
-💕 <b>Food:</b> ${food}<br>
-💕 <b>I'll Pick You Up At:</b> ${pickup}
-</p>
-
-<p>
-I honestly can't wait to spend this day with you.
-No matter what we do, the best part of the date
-will always be you. Every smile, every laugh,
-every little conversation will become one of my
-favorite memories.
-Thank you for saying yes to spending your time
-with me. I already know this day will be one that
-I'll treasure in my heart for a very long time.
-I love you so much. ❤️
+You have no idea how happy this made me.
+Seeing your choices already makes me imagine our first date together.
+I can't wait to spend the day laughing with you, eating our favorite food,
+and making memories that we'll always remember.
+Thank you for giving me the chance to spend my time with the most wonderful
+person I know. I love you so much, and I'm already excited to see your smile.
+❤️
 </p>
 `;
 
-}
-
-function createHeart(){
-
-const heart=document.createElement("div");
-heart.className="heart";
-heart.innerHTML="❤️";
-heart.style.left=Math.random()*100+"vw";
-heart.style.fontSize=(20+Math.random()*30)+"px";
-heart.style.animationDuration=(5+Math.random()*6)+"s";
-
-document.body.appendChild(heart);
-
-setTimeout(()=>{
-heart.remove();
-},10000);
+}).catch(function(error){
+alert("Failed to send: "+JSON.stringify(error));
+});
 
 }
 
-setInterval(createHeart,400);
+function heart(){
 
+const h=document.createElement("div");
+
+h.className="heart";
+h.innerHTML="❤️";
+h.style.left=Math.random()*100+"vw";
+h.style.fontSize=(20+Math.random()*20)+"px";
+h.style.animationDuration=(5+Math.random()*5)+"s";
+
+document.body.appendChild(h);
+
+setTimeout(()=>h.remove(),10000);
+
+}
+
+setInterval(heart,300);
 </script>
 
 </body>
