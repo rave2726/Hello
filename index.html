@@ -1,1 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Will You Go On Our First Date? ❤️</title>
 
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#ff9ecb,#ffd6e7);
+overflow-x:hidden;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+}
+
+.container{
+background:white;
+padding:30px;
+border-radius:20px;
+width:90%;
+max-width:550px;
+text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,.2);
+position:relative;
+z-index:2;
+animation:fade 1s;
+}
+
+h1{
+color:#ff4d88;
+margin-bottom:10px;
+}
+
+p{
+margin-bottom:20px;
+}
+
+select,input{
+width:100%;
+padding:12px;
+margin:10px 0;
+border-radius:10px;
+border:2px solid #ff9ecb;
+font-size:16px;
+}
+
+button{
+margin-top:15px;
+padding:14px;
+width:100%;
+background:#ff4d88;
+color:white;
+border:none;
+border-radius:12px;
+font-size:18px;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover{
+background:#ff2d74;
+transform:scale(1.05);
+}
+
+#result{
+margin-top:25px;
+padding:20px;
+background:#fff0f6;
+border-radius:15px;
+display:none;
+animation:fade 1s;
+}
+
+.heart{
+position:fixed;
+bottom:-20px;
+font-size:25px;
+animation:float 10s linear infinite;
+opacity:.8;
+}
+
+@keyframes float{
+0%{
+transform:translateY(0) rotate(0deg);
+opacity:0;
+}
+20%{
+opacity:1;
+}
+100%{
+transform:translateY(-120vh) rotate(360deg);
+opacity:0;
+}
+}
+
+@keyframes fade{
+from{
+opacity:0;
+transform:translateY(20px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Will You Go On a Date With Me? ❤️</h1>
+
+<p>Every answer you choose will make me smile.</p>
+
+<select id="type">
+<option>Simple Mall Date</option>
+<option>Cinema Date</option>
+<option>Coffee Date</option>
+<option>Picnic Date</option>
+<option>Arcade Date</option>
+<option>Dinner Date</option>
+</select>
+
+<input type="date" id="date">
+
+<input type="time" id="time">
+
+<select id="food">
+<option>Chicken 🍗</option>
+<option>Pizza 🍕</option>
+<option>Burger 🍔</option>
+<option>Steak 🥩</option>
+<option>Pasta 🍝</option>
+<option>Ice Cream 🍨</option>
+<option>Coffee ☕</option>
+<option>Chocolate 🍫</option>
+</select>
+
+<input type="time" id="pickup" placeholder="Pickup Time">
+
+<button onclick="showMessage()">Send My Answer ❤️</button>
+
+<div id="result"></div>
+
+</div>
+
+<audio autoplay loop>
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+function showMessage(){
+
+let type=document.getElementById("type").value;
+let date=document.getElementById("date").value;
+let time=document.getElementById("time").value;
+let food=document.getElementById("food").value;
+let pickup=document.getElementById("pickup").value;
+
+let result=document.getElementById("result");
+
+result.style.display="block";
+
+result.innerHTML=`
+<h2>Thank You, My Love ❤️</h2>
+
+<p>
+Reading your choices made my heart so happy.
+I can't stop smiling knowing that we're planning
+our very first date together.
+</p>
+
+<p>
+💕 <b>Date:</b> ${date}<br>
+💕 <b>Date Type:</b> ${type}<br>
+💕 <b>Time:</b> ${time}<br>
+💕 <b>Food:</b> ${food}<br>
+💕 <b>I'll Pick You Up At:</b> ${pickup}
+</p>
+
+<p>
+I honestly can't wait to spend this day with you.
+No matter what we do, the best part of the date
+will always be you. Every smile, every laugh,
+every little conversation will become one of my
+favorite memories.
+Thank you for saying yes to spending your time
+with me. I already know this day will be one that
+I'll treasure in my heart for a very long time.
+I love you so much. ❤️
+</p>
+`;
+
+}
+
+function createHeart(){
+
+const heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(20+Math.random()*30)+"px";
+heart.style.animationDuration=(5+Math.random()*6)+"s";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},10000);
+
+}
+
+setInterval(createHeart,400);
+
+</script>
+
+</body>
+</html>
